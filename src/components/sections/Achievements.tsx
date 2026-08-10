@@ -11,11 +11,13 @@ export function Achievements() {
         <div className="achievements-grid">
           {achievements.map((ach, i) => (
             <Reveal key={ach.title} delay={i * 0.1}>
-              <div className="achievement-card">
+              <div className={`achievement-card ${ach.filled ? "filled" : ""}`}>
                 <span className="ach-icon">{ach.filled ? "★" : "⊕"}</span>
                 <h3>{ach.title}</h3>
-                <p>{ach.filled ? "Added." : ach.hint}</p>
-                <span className="ach-edit">Edit in src/data/profile.ts</span>
+                <p>{ach.hint}</p>
+                {!ach.filled && (
+                  <span className="ach-edit">Edit in src/data/profile.ts</span>
+                )}
               </div>
             </Reveal>
           ))}

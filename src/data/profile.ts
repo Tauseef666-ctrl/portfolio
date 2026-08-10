@@ -253,18 +253,18 @@ export const journey = [
 
 export const achievements = [
   {
+    title: "Open Source Projects",
+    hint: "4 projects published on GitHub — CyberSec Hub, Evolve, RopeTyper and Python Learn App.",
+    filled: true,
+  },
+  {
+    title: "Skill Milestones",
+    hint: "Android development · Web development · Software testing · AI prompt engineering.",
+    filled: true,
+  },
+  {
     title: "Certifications",
-    hint: "Add certifications you earn — name, issuer, year.",
-    filled: false,
-  },
-  {
-    title: "Completed Projects",
-    hint: "Add finished projects with a one-line summary.",
-    filled: false,
-  },
-  {
-    title: "Learning Milestones",
-    hint: "Add skills or technologies you have mastered.",
+    hint: "Add your certifications here as you earn them — name, issuer, year.",
     filled: false,
   },
 ];

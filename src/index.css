@@ -1744,6 +1744,37 @@ h4 {
   color: var(--cyan);
 }
 
+.contact-link .cl-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+}
+
+.contact-link .cl-text strong {
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.contact-link .cl-sub {
+  font-size: 0.76rem;
+  color: var(--text-faint);
+}
+
+.contact-link .cl-arrow {
+  color: var(--cyan);
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-out);
+}
+
+.contact-link:hover .cl-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .contact-link.disabled {
   opacity: 0.6;
   border-style: dashed;

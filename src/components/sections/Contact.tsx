@@ -68,35 +68,40 @@ export function Contact() {
             <Reveal>
               <p className="contact-note">{contact.note}</p>
               <div className="contact-links">
-                {socialLinks.map((link) => {
-                  const filled = !!link.value;
-                  const href = filled
-                    ? link.prefix + link.value
-                    : undefined;
-                  const inner = (
-                    <>
-                      <span className="cl-icon" aria-hidden="true">
-                        {link.icon}
-                      </span>
-                      <span>
-                        {link.label}
-                        {filled ? (
-                          <span style={{ display: "block", fontSize: "0.78rem", color: "var(--text-faint)" }}>
-                            {link.value}
+                  {socialLinks.map((link) => {
+                    const filled = !!link.value;
+                    const href = filled ? link.prefix + link.value : undefined;
+                    const inner = (
+                      <>
+                        <span className="cl-icon" aria-hidden="true">
+                          {link.icon}
+                        </span>
+                        <span className="cl-text">
+                          <strong>{link.label}</strong>
+                          <span className="cl-sub">
+                            {filled
+                              ? link.key === "email"
+                                ? "Send me an email"
+                                : "Open my profile"
+                              : `Add your ${link.label.toLowerCase()} link in src/data/profile.ts`}
                           </span>
-                        ) : (
-                          <span style={{ display: "block", fontSize: "0.78rem", color: "var(--text-faint)" }}>
-                            Add your {link.label.toLowerCase()} in src/data/profile.ts
-                          </span>
-                        )}
-                      </span>
-                    </>
-                  );
-                  return filled ? (
-                    <a key={link.key} className="contact-link" href={href} target={link.key !== "email" ? "_blank" : undefined} rel="noreferrer">
-                      {inner}
-                    </a>
-                  ) : (
+                        </span>
+                        <span className="cl-arrow" aria-hidden="true">
+                          {filled ? "↗" : ""}
+                        </span>
+                      </>
+                    );
+                    return filled ? (
+                      <a
+                        key={link.key}
+                        className="contact-link"
+                        href={href}
+                        target={link.key !== "email" ? "_blank" : undefined}
+                        rel="noreferrer"
+                      >
+                        {inner}
+                      </a>
+                    ) : (
                     <div key={link.key} className="contact-link disabled" aria-disabled="true">
                       {inner}
                     </div>
