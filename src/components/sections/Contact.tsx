@@ -12,7 +12,6 @@ const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const socialLinks = [
   { key: "email", label: "Email", value: contact.email, icon: "✉", prefix: "mailto:" },
   { key: "github", label: "GitHub", value: contact.github, icon: "⌥", prefix: "" },
-  { key: "linkedin", label: "LinkedIn", value: contact.linkedin, icon: "in", prefix: "" },
 ];
 
 export function Contact() {
