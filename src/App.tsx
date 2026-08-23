@@ -15,6 +15,7 @@ import { AI } from "./components/sections/AI";
 import { About } from "./components/sections/About";
 import { Journey } from "./components/sections/Journey";
 import { Achievements } from "./components/sections/Achievements";
+import { Certificates } from "./components/sections/Certificates";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/sections/Footer";
 
@@ -68,6 +69,7 @@ function Shell() {
         <About />
         <Journey />
         <Achievements />
+        <Certificates />
         <Contact />
       </main>
       <Footer />

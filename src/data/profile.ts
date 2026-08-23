@@ -117,6 +117,84 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: "space-research",
+    name: "Space Research Platform",
+    tagline: "Interactive 3D platform to explore the solar system, exoplanets, asteroids and NASA research data.",
+    description:
+      "An immersive 3D space research platform. Fly through the solar system, inspect exoplanets and asteroids, and browse real NASA research data — all inside an interactive 3D environment.",
+    technologies: ["TypeScript", "React", "Three.js"],
+    contribution: "Concept, design and development — built by me.",
+    status: "Live",
+    github: "https://github.com/Tauseef666-ctrl/PLANET-RESEARCH",
+    demo: "https://planet-research.vercel.app/",
+    accent: "#60a5fa",
+  },
+  {
+    id: "ecoscore",
+    name: "EcoScore",
+    tagline: "CBSE Class 12 Economics learning platform — understand concepts, practise smarter, revise faster, score better.",
+    description:
+      "A focused learning platform for CBSE Class 12 Economics covering Macroeconomics and Indian Economic Development, built to make concepts click and revision efficient.",
+    technologies: ["React", "Next.js"],
+    contribution: "Concept, design and development — built by me.",
+    status: "Live",
+    github: "",
+    demo: "https://economics-beta.vercel.app/",
+    accent: "#fbbf24",
+  },
+  {
+    id: "ninja-slice",
+    name: "Ninja Slice",
+    tagline: "A Fruit Ninja-style browser game you control with your hands — real-time webcam hand tracking slices the fruit.",
+    description:
+      "A browser slicing game powered by webcam hand tracking. Your hands become blades — slash flying fruit in real time using MediaPipe hand-tracking, no controller needed.",
+    technologies: ["JavaScript", "MediaPipe", "Webcam Tracking"],
+    contribution: "Concept, design and development — built by me.",
+    status: "Live",
+    github: "",
+    demo: "https://fruitninja-by.netlify.app/",
+    accent: "#fb923c",
+  },
+  {
+    id: "btech-prep",
+    name: "CSE Entrance Prep",
+    tagline: "Smart study tracker for CSE entrance preparation — organised subjects, progress tracking and revision planning.",
+    description:
+      "An offline-first study companion for CSE entrance preparation. Track subjects, monitor progress and plan revisions with a clean, distraction-free interface.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    contribution: "Concept, design and development — built by me.",
+    status: "Live",
+    github: "",
+    demo: "https://btech-prep.netlify.app/",
+    accent: "#34d399",
+  },
+  {
+    id: "luna-ai",
+    name: "Luna AI",
+    tagline: "Personal AI voice assistant for Windows 11 — offline multilingual voice, 3D avatars with lipsync and task automation.",
+    description:
+      "A desktop AI voice assistant that works offline-first with English, Hindi and Urdu voice support. Features 3D animated avatars with lipsync, task automation, and both local (Ollama) and cloud modes.",
+    technologies: ["Python", "Tauri", "TypeScript", "Ollama"],
+    contribution: "Author and developer of the project.",
+    status: "Open Source",
+    github: "https://github.com/Tauseef666-ctrl/luna-ai",
+    demo: "",
+    accent: "#a78bfa",
+  },
+  {
+    id: "t2s",
+    name: "T2S — Study Together",
+    tagline: "Three friends, one journey — a group study app with quizzes, shared notes, AI chat, focus timer and exam prep.",
+    description:
+      "A futuristic group study app built for three Diploma CSE friends. Study groups, subject quizzes, shared notes and resources, an AI chat for core CS subjects, a Pomodoro focus timer and exam preparation — all in one place.",
+    technologies: ["React Native", "Expo", "TypeScript"],
+    contribution: "Author and developer of the project.",
+    status: "Open Source",
+    github: "https://github.com/Tauseef666-ctrl/T2S",
+    demo: "",
+    accent: "#f472b6",
+  },
+  {
     id: "cybersec-hub",
     name: "CyberSec Hub",
     tagline: "Learn cybersecurity from scratch — an Android app with 7 tracks, 39 lessons, a sandboxed terminal and completion certificates.",
@@ -247,6 +325,75 @@ export const journey = [
 ];
 
 /* -------------------------------------------------------------------------- */
+/*  CERTIFICATES — real certificates only. Files live in public/certificates/. */
+/* -------------------------------------------------------------------------- */
+
+export type Certificate = {
+  id: string;
+  title: string;
+  issuer: string;
+  date?: string;
+  file: string;
+  skills: string[];
+  accent: string;
+};
+
+export const certificates: Certificate[] = [
+  {
+    id: "deloitte-cyber",
+    title: "Cyber Job Simulation",
+    issuer: "Deloitte · Forage",
+    date: "Jun 2026",
+    file: "certificates/deloitte-cyber-job-simulation.pdf",
+    skills: ["Cybersecurity"],
+    accent: "#22d3ee",
+  },
+  {
+    id: "deloitte-data",
+    title: "Data Analytics Job Simulation",
+    issuer: "Deloitte · Forage",
+    date: "Jun 2026",
+    file: "certificates/deloitte-data-analytics-simulation.pdf",
+    skills: ["Data Analysis", "Forensic Technology"],
+    accent: "#8b5cf6",
+  },
+  {
+    id: "deloitte-tech",
+    title: "Technology Job Simulation",
+    issuer: "Deloitte · Forage",
+    date: "Jun 2026",
+    file: "certificates/deloitte-technology-job-simulation.pdf",
+    skills: ["Coding Development"],
+    accent: "#3b82f6",
+  },
+  {
+    id: "ey-microsoft-ai",
+    title: "AI Skills Passport",
+    issuer: "EY & Microsoft",
+    file: "certificates/ey-microsoft-ai-skills-passport.pdf",
+    skills: ["Artificial Intelligence", "Employability"],
+    accent: "#e879f9",
+  },
+  {
+    id: "indeed-resume",
+    title: "How to Make a Resume (With Examples)",
+    issuer: "Indeed Career Guide · SkillsBuild",
+    date: "Aug 2026",
+    file: "certificates/indeed-resume-skillsbuild.pdf",
+    skills: ["Career Skills"],
+    accent: "#34d399",
+  },
+  {
+    id: "digicoders",
+    title: "Training Certificate",
+    issuer: "DigiCoders",
+    file: "certificates/digicoders-certificate.jpg",
+    skills: [],
+    accent: "#fbbf24",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
 /*  ACHIEVEMENTS — placeholder slots. Fill them in as you earn them.          */
 /*  Never leave fabricated achievements in here.                              */
 /* -------------------------------------------------------------------------- */
@@ -254,7 +401,7 @@ export const journey = [
 export const achievements = [
   {
     title: "Open Source Projects",
-    hint: "4 projects published on GitHub — CyberSec Hub, Evolve, RopeTyper and Python Learn App.",
+    hint: "8+ projects published — CyberSec Hub, Luna AI, Space Research Platform, Evolve and more.",
     filled: true,
   },
   {
@@ -264,8 +411,8 @@ export const achievements = [
   },
   {
     title: "Certifications",
-    hint: "Add your certifications here as you earn them — name, issuer, year.",
-    filled: false,
+    hint: "6 certificates earned — Deloitte job simulations, EY & Microsoft AI Skills Passport and more.",
+    filled: true,
   },
 ];
 
