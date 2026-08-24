@@ -1782,6 +1782,18 @@ h4 {
   transform: translate(3px, -3px);
 }
 
+.cert-card .cc-verify {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cert-card .cc-verify:hover {
+  color: var(--accent);
+}
+
 /* ------------------------------------------------------------------ */
 /*  CONTACT                                                            */
 /* ------------------------------------------------------------------ */

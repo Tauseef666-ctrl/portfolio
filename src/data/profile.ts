@@ -334,6 +334,7 @@ export type Certificate = {
   issuer: string;
   date?: string;
   file: string;
+  verify?: string;
   skills: string[];
   accent: string;
 };
@@ -365,6 +366,16 @@ export const certificates: Certificate[] = [
     file: "certificates/deloitte-technology-job-simulation.pdf",
     skills: ["Coding Development"],
     accent: "#3b82f6",
+  },
+  {
+    id: "ibm-generative-ai",
+    title: "Generative AI in Action",
+    issuer: "IBM SkillsBuild",
+    date: "Aug 2026",
+    file: "certificates/ibm-generative-ai-in-action.pdf",
+    verify: "https://www.credly.com/badges/c5c7ee68-99d4-40a6-a233-5c41fb8ea740",
+    skills: ["Generative AI"],
+    accent: "#38bdf8",
   },
   {
     id: "ey-microsoft-ai",
@@ -411,7 +422,7 @@ export const achievements = [
   },
   {
     title: "Certifications",
-    hint: "6 certificates earned — Deloitte job simulations, EY & Microsoft AI Skills Passport and more.",
+    hint: "7 certificates earned — IBM Generative AI, Deloitte job simulations, EY & Microsoft AI Skills Passport and more.",
     filled: true,
   },
 ];

@@ -35,6 +35,17 @@ export function Certificates() {
                 <span className="cc-view">
                   View certificate <span className="arrow">↗</span>
                 </span>
+                {cert.verify && (
+                  <a
+                    className="cc-verify"
+                    href={cert.verify}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Verify badge ↗
+                  </a>
+                )}
               </a>
             </Reveal>
           ))}
