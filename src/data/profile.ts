@@ -86,14 +86,23 @@ export const skillGroups: SkillGroup[] = [
 ];
 
 export const tools = [
-  "Android SDK",
-  "Git",
-  "GitHub",
-  "Python",
+  "TypeScript",
   "JavaScript",
   "HTML",
   "CSS",
-  "Termux",
+  "Python",
+  "Java",
+  "Kotlin",
+  "Shell",
+  "React",
+  "Next.js",
+  "React Native",
+  "Expo",
+  "Tailwind CSS",
+  "Android SDK",
+  "Three.js",
+  "Git",
+  "GitHub",
   "AI Tools",
 ];
 
@@ -245,6 +254,58 @@ export const projects: Project[] = [
     github: "https://github.com/Tauseef666-ctrl/python-learn-app",
     demo: "",
     accent: "#3b82f6",
+  },
+  {
+    id: "cat-prep",
+    name: "CAT PREP",
+    tagline: "Smart CAT exam preparation platform — practice questions, track progress and ace the exam.",
+    description:
+      "A focused preparation platform for CAT aspirants. Practise quant, verbal and logical reasoning questions, track your progress over time and build exam-day confidence with a clean, distraction-free interface.",
+    technologies: ["TypeScript", "React", "Vercel"],
+    contribution: "Author and developer of the project.",
+    status: "Open Source",
+    github: "https://github.com/Tauseef666-ctrl/CAT-PREP",
+    demo: "https://cat-prep-omega.vercel.app/",
+    accent: "#f97316",
+  },
+  {
+    id: "bsc-companion",
+    name: "B.Sc Companion",
+    tagline: "Modern mobile-first B.Sc. study companion — syllabus, notes, resources and progress tracking.",
+    description:
+      "A mobile-first study companion for B.Sc. students built with Next.js and Tailwind CSS. Access syllabus content, organised notes, study resources and track your academic progress across semesters.",
+    technologies: ["TypeScript", "Next.js", "Tailwind CSS"],
+    contribution: "Author and developer of the project.",
+    status: "Open Source",
+    github: "https://github.com/Tauseef666-ctrl/bsc-companion",
+    demo: "https://bsc-pi.vercel.app/",
+    accent: "#06b6d4",
+  },
+  {
+    id: "noorul-quran",
+    name: "Noorul Quran",
+    tagline: "Read. Listen. Reflect. — A complete, production-quality Quran web application.",
+    description:
+      "A production-quality Quran web application featuring Arabic text, translation, audio recitation and a reflective reading experience. Built to make engaging with the Quran effortless and meaningful.",
+    technologies: ["TypeScript", "Kotlin", "JavaScript", "CSS"],
+    contribution: "Author and developer of the project.",
+    status: "Open Source",
+    github: "https://github.com/Tauseef666-ctrl/Noorul-Quran",
+    demo: "https://noorul-quran-iota.vercel.app/",
+    accent: "#10b981",
+  },
+  {
+    id: "2nd-year-lateral",
+    name: "2nd Year Lateral",
+    tagline: "Academic companion for 2nd year lateral entry students — resources, notes and study materials.",
+    description:
+      "A study companion app designed for 2nd year lateral entry engineering students. Organised subject-wise resources, notes and materials to help navigate the transition smoothly.",
+    technologies: ["TypeScript", "React", "Vercel"],
+    contribution: "Author and developer of the project.",
+    status: "Open Source",
+    github: "https://github.com/Tauseef666-ctrl/2nd-year-lateral",
+    demo: "https://2nd-year-lateral.vercel.app/",
+    accent: "#8b5cf6",
   },
   {
     id: "portfolio",
@@ -402,6 +463,14 @@ export const certificates: Certificate[] = [
     skills: [],
     accent: "#fbbf24",
   },
+  {
+    id: "ai-environmental",
+    title: "Intersection of AI and Environmental Sustainability",
+    issuer: "Course Certificate",
+    file: "certificates/intersection-ai-environmental-sustainability.pdf",
+    skills: ["Artificial Intelligence", "Sustainability"],
+    accent: "#4ade80",
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -412,17 +481,17 @@ export const certificates: Certificate[] = [
 export const achievements = [
   {
     title: "Open Source Projects",
-    hint: "8+ projects published — CyberSec Hub, Luna AI, Space Research Platform, Evolve and more.",
+    hint: "14+ projects published — Noorul Quran, B.Sc Companion, CAT PREP, CyberSec Hub, Luna AI and more.",
     filled: true,
   },
   {
     title: "Skill Milestones",
-    hint: "Android development · Web development · Software testing · AI prompt engineering.",
+    hint: "TypeScript · JavaScript · Python · Java · Kotlin · Android · Web · Software testing · AI prompt engineering.",
     filled: true,
   },
   {
     title: "Certifications",
-    hint: "7 certificates earned — IBM Generative AI, Deloitte job simulations, EY & Microsoft AI Skills Passport and more.",
+    hint: "8 certificates earned — IBM Generative AI, Deloitte job simulations, EY & Microsoft AI Skills Passport, AI & Environmental Sustainability and more.",
     filled: true,
   },
 ];
