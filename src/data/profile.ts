@@ -86,14 +86,6 @@ export const skillGroups: SkillGroup[] = [
 ];
 
 export const tools = [
-  "TypeScript",
-  "JavaScript",
-  "HTML",
-  "CSS",
-  "Python",
-  "Java",
-  "Kotlin",
-  "Shell",
   "React",
   "Next.js",
   "React Native",
@@ -101,9 +93,75 @@ export const tools = [
   "Tailwind CSS",
   "Android SDK",
   "Three.js",
+  "Framer Motion",
+  "MediaPipe",
+  "Ollama",
   "Git",
   "GitHub",
+  "Vercel",
   "AI Tools",
+];
+
+/* -------------------------------------------------------------------------- */
+/*  LANGUAGES — every language used across my GitHub repositories.            */
+/* -------------------------------------------------------------------------- */
+
+export type Language = {
+  name: string;
+  note: string;
+  accent: string;
+  usage: string[];
+};
+
+export const languages: Language[] = [
+  {
+    name: "TypeScript",
+    note: "My primary language — powers most of my web platforms, React and Next.js apps and this portfolio.",
+    accent: "#3b82f6",
+    usage: ["React", "Next.js", "3D"],
+  },
+  {
+    name: "JavaScript",
+    note: "Core interactive logic across my websites, learning apps and browser games.",
+    accent: "#f7df1e",
+    usage: ["Web", "Games", "Scripting"],
+  },
+  {
+    name: "HTML",
+    note: "The foundation of every site and lesson-based learning app I build.",
+    accent: "#f97316",
+    usage: ["Web", "Learning apps"],
+  },
+  {
+    name: "CSS",
+    note: "Responsive layouts, visual design and animations across all my frontends.",
+    accent: "#38bdf8",
+    usage: ["Web", "UI Design"],
+  },
+  {
+    name: "Kotlin",
+    note: "My modern Android language — used in native apps like Evolve.",
+    accent: "#e879f9",
+    usage: ["Android apps"],
+  },
+  {
+    name: "Java",
+    note: "Android development — powering the RopeTyper game and cyber lessons.",
+    accent: "#fb7185",
+    usage: ["Android", "Games"],
+  },
+  {
+    name: "Python",
+    note: "Automation, AI tooling and scripting experiments.",
+    accent: "#34d399",
+    usage: ["AI", "Automation", "CLI"],
+  },
+  {
+    name: "Shell",
+    note: "Terminal automation and tooling scripts.",
+    accent: "#a3e635",
+    usage: ["Tooling", "Automation"],
+  },
 ];
 
 /* -------------------------------------------------------------------------- */

@@ -9,6 +9,7 @@ import { Navbar } from "./components/navigation/Navbar";
 import { Hero } from "./components/sections/Hero";
 import { Perspective } from "./components/sections/Perspective";
 import { Skills } from "./components/sections/Skills";
+import { Languages } from "./components/sections/Languages";
 import { Projects } from "./components/sections/Projects";
 import { Testing } from "./components/sections/Testing";
 import { AI } from "./components/sections/AI";
@@ -63,6 +64,7 @@ function Shell() {
         <Hero />
         <Perspective />
         <Skills />
+        <Languages />
         <Projects />
         <Testing />
         <AI />

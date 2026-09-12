@@ -1052,6 +1052,72 @@ h4 {
 }
 
 /* ------------------------------------------------------------------ */
+/*  LANGUAGES                                                          */
+/* ------------------------------------------------------------------ */
+
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.language-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  padding: 26px 24px 24px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.4s var(--ease-out), border-color 0.4s, box-shadow 0.4s;
+}
+
+.language-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 24px 48px -20px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.lc-glow {
+  position: absolute;
+  inset: -30% -20% auto -20%;
+  height: 62%;
+  background: radial-gradient(
+    ellipse 60% 55% at 50% 0%,
+    color-mix(in srgb, var(--accent) 26%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.language-card:hover .lc-glow {
+  opacity: 1;
+}
+
+.lc-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  position: relative;
+}
+
+.lc-note {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+  flex: 1;
+  position: relative;
+}
+
+/* ------------------------------------------------------------------ */
 /*  PROJECTS                                                           */
 /* ------------------------------------------------------------------ */
 
