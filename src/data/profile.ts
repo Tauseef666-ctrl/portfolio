@@ -529,6 +529,15 @@ export const certificates: Certificate[] = [
     skills: ["Artificial Intelligence", "Sustainability"],
     accent: "#4ade80",
   },
+  {
+    id: "ai-fundamentals",
+    title: "AI Fundamentals — Foundations for Understanding AI",
+    issuer: "Course Certificate",
+    date: "Sep 2026",
+    file: "certificates/ai-fundamentals-understanding-ai.pdf",
+    skills: ["Artificial Intelligence"],
+    accent: "#818cf8",
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
