@@ -6,9 +6,9 @@ export function Languages() {
   return (
     <section id="languages" className="section">
       <div className="container">
-        <SectionHeading kicker="Languages" title="Languages I Work With" center />
+        <SectionHeading kicker="Languages & Tools" title="Everything I Work With" center />
         <p className="cert-note" style={{ textAlign: "center" }}>
-          The languages I've learned and used across my GitHub repositories.
+          All the languages and technologies from my GitHub profile and repositories.
         </p>
 
         <div className="languages-grid">
