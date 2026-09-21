@@ -486,6 +486,19 @@ export const projects: Project[] = [
     accent: "#8b5cf6",
   },
   {
+    id: "edupath-ai",
+    name: "EduPath AI",
+    tagline: "Adaptive AI learning agent that maps what you know to your target career and replans your learning path.",
+    description:
+      "EduPath is an adaptive AI learning agent that analyzes what a learner already knows, identifies the skills needed for a target career, creates a personalized learning journey, evaluates progress, and automatically replans the journey when it detects a weakness.",
+    technologies: ["TypeScript", "JavaScript", "AI"],
+    contribution: "Author and developer of the project.",
+    status: "Live",
+    github: "https://github.com/Tauseef666-ctrl/edupath-ai",
+    demo: "https://edupath-ai-alpha.vercel.app/",
+    accent: "#4ade80",
+  },
+  {
     id: "portfolio",
     name: "This Portfolio",
     tagline: "An interactive 3D representation of my perspective on technology.",
@@ -658,6 +671,23 @@ export const certificates: Certificate[] = [
     skills: ["Artificial Intelligence"],
     accent: "#818cf8",
   },
+  {
+    id: "agentic-ai-hackathon",
+    title: "Agentic AI Hackathon Participation",
+    issuer: "Hackathon",
+    date: "Sep 2026",
+    file: "certificates/agentic-ai-hackathon-participation.png",
+    skills: ["Agentic AI", "Artificial Intelligence"],
+    accent: "#f59e0b",
+  },
+  {
+    id: "green-skills",
+    title: "Green Skills",
+    issuer: "Course Certificate",
+    file: "certificates/green-skills.pdf",
+    skills: ["Sustainability"],
+    accent: "#10b981",
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -668,7 +698,7 @@ export const certificates: Certificate[] = [
 export const achievements = [
   {
     title: "Open Source Projects",
-    hint: "14+ projects published — Noorul Quran, B.Sc Companion, CAT PREP, CyberSec Hub, Luna AI and more.",
+    hint: "15+ projects published — Noorul Quran, B.Sc Companion, CAT PREP, CyberSec Hub, Luna AI, EduPath AI and more.",
     filled: true,
   },
   {
@@ -678,7 +708,7 @@ export const achievements = [
   },
   {
     title: "Certifications",
-    hint: "8 certificates earned — IBM Generative AI, Deloitte job simulations, EY & Microsoft AI Skills Passport, AI & Environmental Sustainability and more.",
+    hint: "10 certificates earned — IBM Generative AI, Deloitte job simulations, EY & Microsoft AI Skills Passport, AI & Environmental Sustainability, Agentic AI Hackathon and more.",
     filled: true,
   },
 ];
