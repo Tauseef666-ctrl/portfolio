@@ -34,13 +34,16 @@ export function CustomCursor() {
       const interactive = target.closest("a, button, [role='button'], input, textarea");
 
       if (labelled) {
+        document.body.classList.add("cursor-active");
         const text = labelled.dataset.cursor;
         ring.classList.add("is-label");
         label.textContent = text || "VIEW";
       } else if (interactive) {
+        document.body.classList.add("cursor-active");
         ring.classList.add("is-hover");
         label.textContent = "";
       } else {
+        document.body.classList.remove("cursor-active");
         ring.classList.remove("is-label", "is-hover");
         label.textContent = "";
       }

@@ -4,20 +4,16 @@ import { AppProvider } from "./context/app";
 import { useApp } from "./hooks/useApp";
 import { LoadingScreen } from "./components/effects/LoadingScreen";
 import { CustomCursor } from "./components/effects/CustomCursor";
-import { ParticleField } from "./components/effects/ParticleField";
+import { Atmosphere } from "./components/effects/Atmosphere";
 import { Navbar } from "./components/navigation/Navbar";
-import { HeroSequence } from "./components/sections/HeroSequence";
-import { Perspective } from "./components/sections/Perspective";
-import { Skills } from "./components/sections/Skills";
-import { Languages } from "./components/sections/Languages";
-import { Projects } from "./components/sections/Projects";
-import { Testing } from "./components/sections/Testing";
-import { AI } from "./components/sections/AI";
-import { About } from "./components/sections/About";
-import { Journey } from "./components/sections/Journey";
-import { Achievements } from "./components/sections/Achievements";
-import { Certificates } from "./components/sections/Certificates";
-import { Contact } from "./components/sections/Contact";
+import { CinematicHero } from "./components/scenes/CinematicHero";
+import { StoryScene } from "./components/scenes/StoryScene";
+import { CraftScene } from "./components/scenes/CraftScene";
+import { WorkScene } from "./components/scenes/WorkScene";
+import { ProofScene } from "./components/scenes/ProofScene";
+import { ExploreScene } from "./components/scenes/ExploreScene";
+import { NowScene } from "./components/scenes/NowScene";
+import { ReachScene } from "./components/scenes/ReachScene";
 import { Footer } from "./components/sections/Footer";
 
 function Shell() {
@@ -50,29 +46,18 @@ function Shell() {
     <>
       <LoadingScreen onDone={() => setReady(true)} />
       <CustomCursor />
-      <ParticleField />
-      <div className="ambient" aria-hidden="true">
-        <div className="blob blob-cyan" />
-        <div className="blob blob-violet" />
-        <div className="blob blob-magenta" />
-      </div>
-      <div className="grid-overlay" aria-hidden="true" />
-      <div className="vignette" aria-hidden="true" />
+      <Atmosphere />
 
       <Navbar />
       <main>
-        <HeroSequence />
-        <Perspective />
-        <Skills />
-        <Languages />
-        <Projects />
-        <Testing />
-        <AI />
-        <About />
-        <Journey />
-        <Achievements />
-        <Certificates />
-        <Contact />
+        <CinematicHero />
+        <StoryScene />
+        <CraftScene />
+        <WorkScene />
+        <ProofScene />
+        <ExploreScene />
+        <NowScene />
+        <ReachScene />
       </main>
       <Footer />
     </>
