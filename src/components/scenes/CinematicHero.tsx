@@ -2,8 +2,10 @@ import { useEffect, useRef } from "react";
 import type { CSSProperties } from "react";
 import { gsap } from "../../lib/gsap";
 import { profile } from "../../data/profile";
+import { sampleComposition } from "../../data/frameComposition";
 import { useApp } from "../../hooks/useApp";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useMagneticName } from "../../hooks/useMagneticName";
 import { SequenceCanvas } from "../effects/SequenceCanvas";
 import { MagneticButton } from "../ui/MagneticButton";
 
@@ -40,10 +42,22 @@ export function CinematicHero() {
   const reduced = useReducedMotion();
   const { scrollTo } = useApp();
 
+  useMagneticName(sectionRef);
+
   useEffect(() => {
     const section = sectionRef.current;
     const stage = stageRef.current;
     if (!section || !stage) return;
+
+    const applyPose = (p: number) => {
+      const s = sampleComposition(p);
+      stage.dataset.cSide = s.side;
+      stage.style.setProperty("--char-x", s.x.toFixed(3));
+      stage.style.setProperty("--wave", `${((s.p - 0.5) * 14).toFixed(1)}px`);
+    };
+
+    applyPose(0);
+
     if (reduced) {
       scrubRef.current = 0;
       gsap.set([".cinema-type", ".cinema-meta", ".cinema-scroll-cue"], { opacity: 1 });
@@ -75,8 +89,12 @@ export function CinematicHero() {
             onUpdate: (self) => {
               scrubRef.current = self.progress;
               updateSceneTag(self.progress);
+              applyPose(self.progress);
             },
-            onEnter: () => updateSceneTag(0),
+            onEnter: () => {
+              updateSceneTag(0);
+              applyPose(0);
+            },
           },
         });
 
@@ -117,8 +135,23 @@ export function CinematicHero() {
         };
       });
 
-      mm.add("(max-width: 767px)", () => {
-        scrubRef.current = 0;
+      mm.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+        gsap.set([".cinema-type", ".cinema-meta", ".cinema-scroll-cue"], { opacity: 1 });
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=320%",
+            pin: stage,
+            anticipatePin: 1,
+            onUpdate: (self) => {
+              scrubRef.current = self.progress;
+              applyPose(self.progress);
+            },
+            onEnter: () => applyPose(0),
+          },
+        });
+        tl.to({}, { duration: 1 });
         return () => {
           scrubRef.current = 0;
         };
@@ -126,6 +159,7 @@ export function CinematicHero() {
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
         scrubRef.current = 0;
+        stage.style.setProperty("--wave", "0px");
         gsap.set([".cinema-type", ".cinema-meta", ".cinema-scroll-cue"], { opacity: 1 });
       });
     }, section);

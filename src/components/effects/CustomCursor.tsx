@@ -47,20 +47,28 @@ export function CustomCursor() {
     const onOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const labelled = target.closest<HTMLElement>("[data-cursor]");
+      const nameText = target.closest<HTMLElement>(".cinema-name");
       const interactive = target.closest("a, button, [role='button'], input, textarea");
 
-      if (labelled) {
+      if (nameText) {
         document.body.classList.add("cursor-active");
-        const text = labelled.dataset.cursor;
+        ring.classList.add("is-text");
+        ring.classList.remove("is-label", "is-hover");
+        label.textContent = "";
+      } else if (labelled) {
+        document.body.classList.add("cursor-active");
+        ring.classList.remove("is-text");
         ring.classList.add("is-label");
+        const text = labelled.dataset.cursor;
         label.textContent = text || "VIEW";
       } else if (interactive) {
         document.body.classList.add("cursor-active");
+        ring.classList.remove("is-text");
         ring.classList.add("is-hover");
         label.textContent = "";
       } else {
         document.body.classList.remove("cursor-active");
-        ring.classList.remove("is-label", "is-hover");
+        ring.classList.remove("is-label", "is-hover", "is-text");
         label.textContent = "";
       }
     };
