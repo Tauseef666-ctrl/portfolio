@@ -688,6 +688,15 @@ export const certificates: Certificate[] = [
     skills: ["Sustainability"],
     accent: "#10b981",
   },
+  {
+    id: "ibm-bob-hackathon",
+    title: "IBM Bob 2.0 Hackathon Participation",
+    issuer: "IBM · Hackathon",
+    date: "Oct 2026",
+    file: "certificates/IBM Bob 2.0 hackathon-certificate.pdf",
+    skills: ["AI Innovation", "Problem Solving", "Hackathon"],
+    accent: "#60a5fa",
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -708,7 +717,7 @@ export const achievements = [
   },
   {
     title: "Certifications",
-    hint: "10 certificates earned — IBM Generative AI, Deloitte job simulations, EY & Microsoft AI Skills Passport, AI & Environmental Sustainability, Agentic AI Hackathon and more.",
+    hint: "12 certificates earned — IBM Generative AI, Deloitte job simulations, IBM Bob 2.0 Hackathon, EY & Microsoft AI Skills Passport, AI & Environmental Sustainability, Agentic AI Hackathon and more.",
     filled: true,
   },
 ];

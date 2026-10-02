@@ -1,0 +1,14 @@
+{
+  "frameCount": 240,
+  "width": 1280,
+  "height": 720,
+  "mobileWidth": 640,
+  "mobileHeight": 360,
+  "fps": 24,
+  "durationSeconds": 10,
+  "desktopPattern": "frames/frame_{index}.webp",
+  "mobilePattern": "frames/mobile/frame_{index}.webp",
+  "padding": 6,
+  "firstFrame": "frames/frame_000001.webp",
+  "lastFrame": "frames/frame_000240.webp"
+}

@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+_temp_raw_frames
+frames_24fps_1280x720 for animation website.zip
 
 # Editor directories and files
 .vscode/*

@@ -2,127 +2,245 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { projects, type Project } from "../../data/profile";
 import { SectionHeading } from "../../components/ui/SectionHeading";
-import { Reveal } from "../../components/ui/Reveal";
+
+type ProjectCategory = "all" | "ai" | "web" | "mobile";
 
 export function Projects() {
-  const [selected, setSelected] = useState<Project | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>("all");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelected(null);
+      if (e.key === "Escape") setSelectedProject(null);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = selected ? "hidden" : "";
+    document.body.style.overflow = selectedProject ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [selected]);
+  }, [selectedProject]);
+
+  const filteredProjects = projects.filter((p) => {
+    if (selectedCategory === "all") return true;
+    const techs = p.technologies.map((t) => t.toLowerCase()).join(" ");
+    const nameLower = p.name.toLowerCase();
+    const tagLower = p.tagline.toLowerCase();
+
+    if (selectedCategory === "ai") {
+      return (
+        techs.includes("ai") ||
+        techs.includes("ollama") ||
+        techs.includes("mediapipe") ||
+        nameLower.includes("luna") ||
+        nameLower.includes("edupath") ||
+        nameLower.includes("ninja")
+      );
+    }
+    if (selectedCategory === "mobile") {
+      return (
+        techs.includes("android") ||
+        techs.includes("react native") ||
+        techs.includes("expo") ||
+        techs.includes("kotlin") ||
+        techs.includes("java")
+      );
+    }
+    if (selectedCategory === "web") {
+      return (
+        techs.includes("react") ||
+        techs.includes("next.js") ||
+        techs.includes("web") ||
+        techs.includes("html") ||
+        techs.includes("three.js")
+      );
+    }
+    return true;
+  });
 
   return (
-    <section id="projects" className="section">
+    <section id="projects" className="section projects-section">
       <div className="container">
-        <SectionHeading kicker="Projects" title="Experience My Work" center />
-      </div>
+        <SectionHeading kicker="Showcase" title="Featured Projects & Systems" center />
+        <p className="cert-note" style={{ textAlign: "center" }}>
+          Explore full-stack platforms, 3D graphics environments, mobile applications, and offline AI tools.
+        </p>
 
-      <Reveal>
-        <div className="projects-scroller">
-          {projects.map((project) => (
+        {/* Filter categories */}
+        <div className="filter-pill-row" role="tablist" aria-label="Project categories">
+          {[
+            { id: "all", label: `All Systems (${projects.length})` },
+            { id: "ai", label: "AI & Smart Agents" },
+            { id: "web", label: "Web & 3D Platforms" },
+            { id: "mobile", label: "Mobile & Native" },
+          ].map((tab) => (
             <button
-              key={project.id}
-              className="project-card"
-              data-cursor="view"
-              onClick={() => setSelected(project)}
-              style={{ "--accent": project.accent } as React.CSSProperties}
+              key={tab.id}
+              role="tab"
+              aria-selected={selectedCategory === tab.id}
+              className={`filter-pill ${selectedCategory === tab.id ? "is-active" : ""}`}
+              onClick={() => setSelectedCategory(tab.id as ProjectCategory)}
             >
-              <div className="pc-glow" aria-hidden="true" />
-              <span className="project-name">{project.name}</span>
-              <span className="project-status">{project.status}</span>
-              <span className="project-tagline">{project.tagline}</span>
-              <span className="project-techs">
-                {project.technologies.slice(0, 4).map((tech) => (
-                  <span key={tech}>{tech}</span>
-                ))}
-              </span>
-              <span className="project-view">
-                View Project <span className="arrow">→</span>
-              </span>
+              {tab.label}
             </button>
           ))}
         </div>
-      </Reveal>
 
-      <p className="projects-hint">← Drag or scroll →  ·  Tap a card to open it</p>
+        {/* Project Cards Grid */}
+        <div className="projects-grid">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, i) => (
+              <motion.article
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.95, y: 25 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 15 }}
+                transition={{ duration: 0.4, delay: i * 0.03 }}
+                className="project-card-modern"
+                style={{ "--accent": project.accent } as React.CSSProperties}
+                data-cursor="explore"
+              >
+                <div className="pc-glow" aria-hidden="true" />
 
+                <div className="pc-top-bar">
+                  <span className="project-status-badge">{project.status}</span>
+                  <div className="pc-quick-links">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="pc-icon-link"
+                        title="View GitHub Repository"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        GitHub ↗
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="pc-icon-link demo-link"
+                        title="Open Live Demonstration"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Live Demo ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                <div
+                  className="pc-body-click-target"
+                  onClick={() => setSelectedProject(project)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedProject(project);
+                    }
+                  }}
+                >
+                  <h3 className="pc-title">{project.name}</h3>
+                  <p className="pc-tagline">{project.tagline}</p>
+
+                  <div className="project-techs pc-tags">
+                    {project.technologies.slice(0, 4).map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
+                  </div>
+
+                  <div className="pc-details-trigger">
+                    <span>Inspect System & Contribution</span>
+                    <span className="arrow">→</span>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* In-depth Project Details Modal */}
       <AnimatePresence>
-        {selected && (
+        {selectedProject && (
           <motion.div
             className="project-modal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            onClick={() => setSelected(null)}
+            transition={{ duration: 0.3 }}
+            onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              className="project-modal-panel"
-              initial={{ opacity: 0, scale: 0.86, y: 40 }}
+              className="project-modal-panel glass"
+              initial={{ opacity: 0, scale: 0.88, y: 35 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
+              style={{ "--accent": selectedProject.accent } as React.CSSProperties}
             >
-              <button className="pm-close" onClick={() => setSelected(null)} aria-label="Close">
+              <button
+                className="pm-close"
+                onClick={() => setSelectedProject(null)}
+                aria-label="Close project modal"
+              >
                 ✕
               </button>
-              <span className="project-status" style={{ ["--accent" as string]: selected.accent }}>
-                {selected.status}
-              </span>
-              <h3>{selected.name}</h3>
-              <p style={{ color: "var(--text-dim)" }}>{selected.tagline}</p>
 
-              <div className="pm-section">
-                <h4>Overview</h4>
-                <p>{selected.description}</p>
+              <div className="pm-header">
+                <span className="project-status-badge">{selectedProject.status}</span>
+                <h2>{selectedProject.name}</h2>
+                <p className="pm-tagline">{selectedProject.tagline}</p>
               </div>
 
               <div className="pm-section">
-                <h4>My Contribution</h4>
-                <p>{selected.contribution}</p>
+                <h4>System Architecture & Overview</h4>
+                <p>{selectedProject.description}</p>
               </div>
 
               <div className="pm-section">
-                <h4>Technologies</h4>
+                <h4>Role & Contribution</h4>
+                <p>{selectedProject.contribution}</p>
+              </div>
+
+              <div className="pm-section">
+                <h4>Technology Stack</h4>
                 <div className="project-techs">
-                  {selected.technologies.map((tech) => (
+                  {selectedProject.technologies.map((tech) => (
                     <span key={tech}>{tech}</span>
                   ))}
                 </div>
               </div>
 
-              {(selected.github || selected.demo) && (
+              {(selectedProject.github || selectedProject.demo) && (
                 <div className="pm-links">
-                  {selected.github && (
+                  {selectedProject.github && (
                     <a
                       className="btn btn-ghost"
-                      href={selected.github}
+                      href={selectedProject.github}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      GitHub ↗
+                      View GitHub Codebase ↗
                     </a>
                   )}
-                  {selected.demo && (
+                  {selectedProject.demo && (
                     <a
                       className="btn btn-primary"
-                      href={selected.demo}
+                      href={selectedProject.demo}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Live Demo ↗
+                      Launch Live Platform ↗
                     </a>
                   )}
                 </div>
@@ -134,3 +252,4 @@ export function Projects() {
     </section>
   );
 }
+export default Projects;

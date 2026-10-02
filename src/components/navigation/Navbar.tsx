@@ -6,11 +6,13 @@ const links = [
   { id: "home", label: "Home" },
   { id: "perspective", label: "Perspective" },
   { id: "skills", label: "Skills" },
-  { id: "languages", label: "Languages" },
+  { id: "languages", label: "Tech" },
   { id: "projects", label: "Projects" },
+  { id: "testing", label: "QA Lab" },
+  { id: "ai", label: "AI" },
   { id: "about", label: "About" },
   { id: "journey", label: "Journey" },
-  { id: "certificates", label: "Certificates" },
+  { id: "certificates", label: "Credentials" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -28,7 +30,7 @@ export function Navbar() {
           if (entry.isIntersecting) setActive(entry.target.id);
         }
       },
-      { rootMargin: "-40% 0px -55% 0px" }
+      { rootMargin: "-35% 0px -55% 0px" }
     );
     links.forEach(({ id }) => {
       const el = document.getElementById(id);
@@ -49,60 +51,71 @@ export function Navbar() {
         style={{ scaleX: progress }}
         aria-hidden="true"
       />
-      <div className="nav-wrap">
-        <nav className="nav" aria-label="Primary">
-          {links.map((link) => (
-            <button
-              key={link.id}
-              className={`nav-link ${active === link.id ? "active" : ""}`}
-              onClick={() => go(link.id)}
-            >
-              {active === link.id && (
-                <motion.span
-                  className="nav-indicator"
-                  layoutId="nav-indicator"
-                  transition={{ type: "spring", stiffness: 320, damping: 28 }}
-                />
-              )}
-              <span style={{ position: "relative" }}>{link.label}</span>
-            </button>
-          ))}
-        </nav>
+      <header className="nav-wrap">
+        <div className="nav-container">
+          <button
+            className="nav-brand-button"
+            onClick={() => go("home")}
+            aria-label="Back to top"
+          >
+            <span className="brand-dot" />
+            <span className="brand-title">TAUSEEF KHAN</span>
+          </button>
 
-        <button
-          className={`nav-burger ${menuOpen ? "open" : ""}`}
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
+          <nav className="nav" aria-label="Primary Navigation">
+            {links.map((link) => (
+              <button
+                key={link.id}
+                className={`nav-link ${active === link.id ? "active" : ""}`}
+                onClick={() => go(link.id)}
+              >
+                {active === link.id && (
+                  <motion.span
+                    className="nav-indicator"
+                    layoutId="nav-indicator"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
+                <span className="nav-label-text">{link.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          <button
+            className={`nav-burger ${menuOpen ? "open" : ""}`}
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+      </header>
 
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             className="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
           >
-            <nav aria-label="Mobile">
+            <nav aria-label="Mobile Navigation" className="mobile-nav-inner">
               {links.map((link, i) => (
                 <motion.button
                   key={link.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 12 }}
-                  transition={{ delay: 0.05 * i, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className={active === link.id ? "active" : ""}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  transition={{ delay: 0.03 * i, duration: 0.3 }}
+                  className={`mobile-nav-link ${active === link.id ? "active" : ""}`}
                   onClick={() => go(link.id)}
-                  style={{ display: "block", width: "100%" }}
                 >
-                  {link.label}
+                  <span className="mobile-link-dot" />
+                  <span>{link.label}</span>
                 </motion.button>
               ))}
             </nav>
@@ -112,3 +125,4 @@ export function Navbar() {
     </>
   );
 }
+export default Navbar;
