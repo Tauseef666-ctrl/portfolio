@@ -38,7 +38,7 @@ export function CraftScene() {
         </div>
 
         <div className="craft-langs-label" data-reveal>
-          Languages & frameworks — hover for detail
+          Languages & frameworks
         </div>
         <div className="craft-langs">
           {languages.map((lang) => (

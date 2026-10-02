@@ -166,14 +166,6 @@ h4 {
   max-width: 16ch;
 }
 
-.scene-sub {
-  margin-top: 18px;
-  max-width: 58ch;
-  color: var(--muted);
-  font-size: 1.05rem;
-  font-weight: 300;
-}
-
 .scene-num {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -1338,17 +1330,6 @@ body.cursor-active .cursor-dot {
   flex-wrap: wrap;
 }
 
-.work-hint {
-  position: absolute;
-  bottom: 26px;
-  right: 6vw;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.26em;
-  color: var(--dim);
-  text-transform: uppercase;
-}
-
 .work-status {
   position: absolute;
   top: 22px;
@@ -1677,14 +1658,6 @@ body.cursor-active .cursor-dot {
   margin: 26px auto 18px;
 }
 
-.end-mark-sub {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-
 footer.site-footer {
   position: relative;
   z-index: 2;
@@ -1891,9 +1864,6 @@ footer.site-footer a:hover {
   }
   .achieve-grid {
     grid-template-columns: 1fr;
-  }
-  .work-hint {
-    display: none;
   }
   .work-track {
     flex-wrap: wrap;

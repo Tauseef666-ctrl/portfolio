@@ -5,8 +5,7 @@ export function Footer() {
         © {new Date().getFullYear()} Tauseef Khan ·{" "}
         <a href="https://github.com/Tauseef666-ctrl" target="_blank" rel="noreferrer">
           GitHub
-        </a>{" "}
-        · Built as a scroll-driven film
+        </a>
       </p>
     </footer>
   );

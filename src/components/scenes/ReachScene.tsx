@@ -37,7 +37,6 @@ export function ReachScene() {
         <div className="end-mark" data-reveal>
           <div className="end-mark-name">TAUSEEF.KHAN</div>
           <div className="end-mark-line" />
-          <div className="end-mark-sub">Built as a scroll-driven film — React · Vite · GSAP · Lenis</div>
         </div>
       </div>
     </section>

@@ -17,7 +17,6 @@ export function ProofScene() {
           <div className="scene-num">SCENE 05</div>
           <div className="scene-eyebrow">The Evidence</div>
           <h2 className="scene-title">Proof of learning.</h2>
-          <p className="scene-sub">Every certificate is real. Issuer, skills and verification links are preserved below.</p>
         </div>
 
         <div className="proof-line">

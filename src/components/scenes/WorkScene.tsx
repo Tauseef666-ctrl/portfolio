@@ -87,7 +87,6 @@ export function WorkScene() {
           ))}
         </div>
       </div>
-      <div className="work-hint">Scroll — the track advances</div>
     </section>
   );
 }

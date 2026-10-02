@@ -157,7 +157,7 @@ export function CinematicHero() {
 
         <div className="cinema-type">
           <div className="cinema-brand">
-            <div className="cinema-kicker">Scroll-driven film</div>
+            <div className="cinema-kicker">The Reel</div>
             <NameLetters name="TAUSEEF KHAN" />
           </div>
           <div className="cinema-lower">
