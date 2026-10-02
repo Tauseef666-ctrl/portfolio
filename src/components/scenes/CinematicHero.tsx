@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 import { gsap } from "../../lib/gsap";
 import { profile } from "../../data/profile";
 import { useApp } from "../../hooks/useApp";
@@ -10,19 +11,24 @@ const SCENE_COUNT = 8;
 
 function NameLetters({ name }: { name: string }) {
   return (
-    <span className="cinema-name">
+    <h1 className="cinema-name" role="text" aria-label={name}>
       {name.split("").map((ch, i) =>
         ch === " " ? (
-          <span key={i} className="cinema-name-space">
+          <span key={i} className="cinema-name-space" aria-hidden="true">
             &nbsp;
           </span>
         ) : (
-          <span key={i} className="cinema-name-letter">
-            {ch}
+          <span
+            key={i}
+            className="cinema-name-letter"
+            style={{ "--i": i } as CSSProperties}
+            aria-hidden="true"
+          >
+            <span className="cinema-name-char">{ch}</span>
           </span>
         )
       )}
-    </span>
+    </h1>
   );
 }
 
@@ -80,26 +86,31 @@ export function CinematicHero() {
           letters,
           { autoAlpha: 0, y: 96, rotateX: -22, filter: "blur(12px)" },
           { autoAlpha: 1, y: 0, rotateX: 0, filter: "blur(0px)", duration: 0.5, ease: "power4.out", stagger: 0.026 },
-          0.06
+          0.1
         );
 
-        tl.fromTo(".cinema-kicker", { autoAlpha: 0, y: -22 }, { autoAlpha: 1, y: 0, duration: 0.35 }, 0.04);
+        tl.fromTo(".cinema-kicker", { autoAlpha: 0, y: -22 }, { autoAlpha: 1, y: 0, duration: 0.35 }, 0.06);
         tl.fromTo(
           roles,
           { autoAlpha: 0, x: -18 },
           { autoAlpha: 1, x: 0, duration: 0.32, stagger: 0.06 },
-          0.22
+          0.2
         );
-        tl.fromTo(".cinema-prologue", { autoAlpha: 0, y: 22 }, { autoAlpha: 1, y: 0, duration: 0.4 }, 0.42);
-        tl.fromTo(".cinema-cta", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.35 }, 0.5);
+        tl.fromTo(".cinema-prologue", { autoAlpha: 0, y: 22 }, { autoAlpha: 1, y: 0, duration: 0.4 }, 0.34);
+        tl.fromTo(".cinema-cta", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.35 }, 0.44);
         tl.fromTo(meta, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3, stagger: 0.07 }, 0);
-        tl.fromTo(".cinema-scroll-cue", { autoAlpha: 0 }, { autoAlpha: 0.8 }, 0.62);
+        tl.fromTo(".cinema-scroll-cue", { autoAlpha: 0 }, { autoAlpha: 0.8 }, 0.5);
+        tl.fromTo(".cinema-scrub-fill", { scaleX: 0 }, { scaleX: 1, ease: "none" }, 0);
 
-        // Exit passage — identity leaves the frame toward the next scene
-        tl.to(letters, { y: -70, scale: 1.06, rotateX: 8, stagger: 0.012, duration: 0.45, ease: "power2.in" }, 0.62);
-        tl.to([".cinema-roles", ".cinema-prologue", ".cinema-cta"], { autoAlpha: 0, y: -28, duration: 0.35 }, 0.68);
-        tl.to([".cinema-kicker", ".cinema-scroll-cue", ...meta], { autoAlpha: 0, duration: 0.3 }, 0.72);
-        tl.to(letters, { autoAlpha: 0, y: -120, scale: 1.32, duration: 0.5, ease: "power3.in" }, 0.76);
+        // The name stays on the scrolling frames — it only settles in depth with the footage.
+        tl.to(letters, { y: -30, scale: 1.05, ease: "none", duration: 0.4 }, 0.62);
+
+        // Supporting copy gives way first; the identity remains on the footage.
+        tl.to([".cinema-roles", ".cinema-prologue", ".cinema-cta"], { autoAlpha: 0, y: -24, duration: 0.4 }, 0.66);
+        tl.to([".cinema-kicker", ".cinema-scroll-cue", ...meta], { autoAlpha: 0, duration: 0.35 }, 0.72);
+
+        // Final hand-off — the name exits as the pinned scene lets go.
+        tl.to(letters, { autoAlpha: 0, y: -80, scale: 1.16, duration: 0.45, ease: "power3.in" }, 0.93);
 
         return () => {
           scrubRef.current = 0;
@@ -145,20 +156,24 @@ export function CinematicHero() {
         </div>
 
         <div className="cinema-type">
-          <div className="cinema-kicker">Scroll-driven film</div>
-          <NameLetters name="TAUSEEF KHAN" />
-          <div className="cinema-roles">
-            {profile.roles.map((r) => (
-              <span key={r} className="cinema-role">
-                {r}
-              </span>
-            ))}
+          <div className="cinema-brand">
+            <div className="cinema-kicker">Scroll-driven film</div>
+            <NameLetters name="TAUSEEF KHAN" />
           </div>
-          <p className="cinema-prologue">{profile.heroIntro}</p>
-          <div className="cinema-cta">
-            <MagneticButton className="btn btn-primary" onClick={() => scrollTo("#story")}>
-              Enter the work
-            </MagneticButton>
+          <div className="cinema-lower">
+            <div className="cinema-roles">
+              {profile.roles.map((r) => (
+                <span key={r} className="cinema-role">
+                  {r}
+                </span>
+              ))}
+            </div>
+            <p className="cinema-prologue">{profile.heroIntro}</p>
+            <div className="cinema-cta">
+              <MagneticButton className="btn btn-primary" onClick={() => scrollTo("#story")}>
+                Enter the work
+              </MagneticButton>
+            </div>
           </div>
         </div>
 

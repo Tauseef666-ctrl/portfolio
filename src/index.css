@@ -312,8 +312,18 @@ h4 {
 /*  CURSOR                                                             */
 /* ------------------------------------------------------------------ */
 
+body.cursor-on,
+body.cursor-on a,
+body.cursor-on button,
+body.cursor-on input,
+body.cursor-on textarea,
+body.cursor-on * {
+  cursor: none !important;
+}
+
 .cursor-dot,
-.cursor-ring {
+.cursor-ring,
+.cursor-tail {
   position: fixed;
   top: 0;
   left: 0;
@@ -327,21 +337,61 @@ h4 {
   width: 6px;
   height: 6px;
   background: var(--accent);
-  margin: -3px 0 0 -3px;
+  box-shadow: 0 0 10px rgba(224, 162, 82, 0.85), 0 0 22px rgba(224, 162, 82, 0.4);
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(224, 162, 82, 0.7), 0 0 18px rgba(224, 162, 82, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(224, 162, 82, 1), 0 0 26px rgba(224, 162, 82, 0.5);
+  }
+}
+
+.cursor-tail {
+  width: 92px;
+  height: 5px;
+  transform-origin: 0 50%;
+  background: linear-gradient(
+    90deg,
+    rgba(224, 162, 82, 0.65),
+    rgba(224, 162, 82, 0.2) 55%,
+    rgba(224, 162, 82, 0) 100%
+  );
+  border-radius: 999px;
+  filter: blur(1.5px);
+  opacity: 0;
+  z-index: 999;
 }
 
 .cursor-ring {
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(224, 162, 82, 0.55);
-  margin: -17px 0 0 -17px;
-  transition: width 0.3s var(--ease), height 0.3s var(--ease), margin 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease);
+  border: 1px solid rgba(224, 162, 82, 0.4);
+  transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.cursor-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 1px dashed rgba(224, 162, 82, 0.55);
+  animation: cursor-spin 7s linear infinite;
+}
+
+@keyframes cursor-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 body.cursor-active .cursor-ring {
   width: 54px;
   height: 54px;
-  margin: -27px 0 0 -27px;
   background: rgba(224, 162, 82, 0.08);
   border-color: rgba(224, 162, 82, 0.9);
 }
@@ -357,7 +407,6 @@ body.cursor-active .cursor-dot {
 .cursor-ring.is-label {
   width: 64px;
   height: 64px;
-  margin: -32px 0 0 -32px;
   background: rgba(224, 162, 82, 0.12);
   border-color: rgba(224, 162, 82, 0.85);
 }
@@ -376,7 +425,8 @@ body.cursor-active .cursor-dot {
 
 @media (pointer: coarse) {
   .cursor-dot,
-  .cursor-ring {
+  .cursor-ring,
+  .cursor-tail {
     display: none;
   }
 }
@@ -755,8 +805,28 @@ body.cursor-active .cursor-dot {
   z-index: 4;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0 6vw;
+  justify-content: space-between;
+  padding: calc(var(--nav-h) + 56px) 6vw 76px;
+  pointer-events: none;
+}
+
+.cinema-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(16px, 2.4vh, 24px);
+  pointer-events: auto;
+}
+
+.cinema-brand .cinema-kicker {
+  margin-bottom: 0;
+}
+
+.cinema-lower {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: min(620px, 86vw);
   pointer-events: none;
 }
 
@@ -791,12 +861,29 @@ body.cursor-active .cursor-dot {
   font-size: clamp(2.4rem, 8.4vw, 7.2rem);
   line-height: 1;
   text-shadow: 0 2px 40px rgba(0, 0, 0, 0.5);
+  perspective: 900px;
+  cursor: default;
 }
 
 .cinema-name-letter,
 .cinema-name-space {
   display: inline-block;
+  transform-style: preserve-3d;
   will-change: transform, opacity, filter;
+}
+
+.cinema-name-char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  transition: transform 0.36s var(--ease), color 0.28s var(--ease), text-shadow 0.28s var(--ease);
+  transition-delay: 0s;
+}
+
+.cinema-name:hover .cinema-name-char {
+  transform: translateY(-0.1em) rotateX(26deg) scale(1.08);
+  color: var(--accent);
+  text-shadow: 0 14px 34px rgba(224, 162, 82, 0.4);
+  transition-delay: calc(var(--i, 0) * 22ms);
 }
 
 .cinema-name-space {
@@ -1844,6 +1931,12 @@ footer.site-footer a:hover {
   .cinema-meta-br {
     right: 16px;
   }
+  .cinema-type {
+    padding: calc(var(--nav-h) + 10px) 5vw 62px;
+  }
+  .cinema-lower {
+    width: 88vw;
+  }
   .cinema-name {
     font-size: clamp(2rem, 12vw, 3.4rem);
   }
@@ -1872,7 +1965,8 @@ footer.site-footer a:hover {
     animation: none;
   }
   .cursor-dot,
-  .cursor-ring {
+  .cursor-ring,
+  .cursor-tail {
     display: none;
   }
 }

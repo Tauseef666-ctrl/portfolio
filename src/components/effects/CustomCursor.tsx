@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const tailRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -12,20 +13,35 @@ export function CustomCursor() {
 
     const dot = dotRef.current;
     const ring = ringRef.current;
+    const tail = tailRef.current;
     const label = labelRef.current;
-    if (!dot || !ring || !label) return;
+    if (!dot || !ring || !tail || !label) return;
 
-    let mouseX = -100;
-    let mouseY = -100;
+    document.body.classList.add("cursor-on");
+
+    let x = -100;
+    let y = -100;
     let dotX = -100;
     let dotY = -100;
     let ringX = -100;
     let ringY = -100;
+    let tailX = -100;
+    let tailY = -100;
+    let lastX = -100;
+    let lastY = -100;
+    let vx = 0;
+    let vy = 0;
+    let sVx = 0;
+    let sVy = 0;
     let raf = 0;
 
     const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      x = e.clientX;
+      y = e.clientY;
+      vx = x - lastX;
+      vy = y - lastY;
+      lastX = x;
+      lastY = y;
     };
 
     const onOver = (e: MouseEvent) => {
@@ -50,12 +66,23 @@ export function CustomCursor() {
     };
 
     const loop = () => {
-      dotX += (mouseX - dotX) * 0.55;
-      dotY += (mouseY - dotY) * 0.55;
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
-      dot.style.transform = `translate3d(${dotX - 3}px, ${dotY - 3}px, 0)`;
-      ring.style.transform = `translate3d(${ringX - 19}px, ${ringY - 19}px, 0)`;
+      dotX += (x - dotX) * 0.6;
+      dotY += (y - dotY) * 0.6;
+      ringX += (x - ringX) * 0.16;
+      ringY += (y - ringY) * 0.16;
+      tailX += (x - tailX) * 0.7;
+      tailY += (y - tailY) * 0.7;
+
+      sVx = sVx * 0.82 + vx * 0.18;
+      sVy = sVy * 0.82 + vy * 0.18;
+      const speed = Math.min(1, Math.hypot(sVx, sVy) / 42);
+      const angle = Math.atan2(sVy, sVx) * (180 / Math.PI);
+
+      dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      tail.style.transform = `translate3d(${tailX}px, ${tailY}px, 0) rotate(${angle}deg) scaleX(${0.25 + 0.75 * speed})`;
+      tail.style.opacity = String(0.22 + 0.62 * speed);
+
       raf = requestAnimationFrame(loop);
     };
 
@@ -64,6 +91,7 @@ export function CustomCursor() {
     raf = requestAnimationFrame(loop);
 
     return () => {
+      document.body.classList.remove("cursor-on");
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseover", onOver);
       cancelAnimationFrame(raf);
@@ -72,6 +100,7 @@ export function CustomCursor() {
 
   return (
     <>
+      <div ref={tailRef} className="cursor-tail" aria-hidden="true" />
       <div ref={dotRef} className="cursor-dot" />
       <div ref={ringRef} className="cursor-ring">
         <span ref={labelRef} />
