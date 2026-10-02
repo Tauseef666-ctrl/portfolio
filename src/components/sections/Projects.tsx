@@ -28,7 +28,6 @@ export function Projects() {
     if (selectedCategory === "all") return true;
     const techs = p.technologies.map((t) => t.toLowerCase()).join(" ");
     const nameLower = p.name.toLowerCase();
-    const tagLower = p.tagline.toLowerCase();
 
     if (selectedCategory === "ai") {
       return (

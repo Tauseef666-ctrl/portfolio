@@ -6,7 +6,7 @@ import { LoadingScreen } from "./components/effects/LoadingScreen";
 import { CustomCursor } from "./components/effects/CustomCursor";
 import { ParticleField } from "./components/effects/ParticleField";
 import { Navbar } from "./components/navigation/Navbar";
-import { Hero } from "./components/sections/Hero";
+import { HeroSequence } from "./components/sections/HeroSequence";
 import { Perspective } from "./components/sections/Perspective";
 import { Skills } from "./components/sections/Skills";
 import { Languages } from "./components/sections/Languages";
@@ -61,7 +61,7 @@ function Shell() {
 
       <Navbar />
       <main>
-        <Hero />
+        <HeroSequence />
         <Perspective />
         <Skills />
         <Languages />

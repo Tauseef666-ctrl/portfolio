@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { certificates, type Certificate } from "../../data/profile";
 import { SectionHeading } from "../../components/ui/SectionHeading";
-import { Reveal } from "../../components/ui/Reveal";
 
 type CategoryFilter = "all" | "ai" | "simulation" | "course";
 

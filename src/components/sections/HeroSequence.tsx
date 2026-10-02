@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { profile } from "../../data/profile";
 import { useApp } from "../../hooks/useApp";
-import { useIsTouch } from "../../hooks/useIsTouch";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { InteractiveName } from "../effects/InteractiveName";
 import { MagneticButton } from "../ui/MagneticButton";
@@ -17,7 +16,6 @@ function formatFrameNumber(num: number): string {
 
 export function HeroSequence() {
   const { scrollTo } = useApp();
-  const isTouch = useIsTouch();
   const reduced = useReducedMotion();
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -289,6 +287,9 @@ export function HeroSequence() {
                 <div className="hero-frame-loader">
                   <div className="hero-frame-spinner" />
                   <span>INITIALIZING HERO SEQUENCE…</span>
+                  <span className="hero-frame-progress">
+                    {Math.round(loadedRatio * 100)}%
+                  </span>
                 </div>
               )}
             </div>

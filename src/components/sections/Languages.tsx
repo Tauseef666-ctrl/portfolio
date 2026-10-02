@@ -11,7 +11,6 @@ export function Languages() {
   const filtered = languages.filter((l) => {
     if (filter === "all") return true;
     const name = l.name.toLowerCase();
-    const usage = l.usage.map((u) => u.toLowerCase()).join(" ");
 
     if (filter === "lang") {
       return ["typescript", "javascript", "python", "kotlin", "java", "html", "css", "shell"].includes(name);
