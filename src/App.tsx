@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { MotionConfig } from "framer-motion";
 import Lenis from "lenis";
 import { AppProvider } from "./context/app";
 import { useApp } from "./hooks/useApp";
@@ -44,12 +45,15 @@ function Shell() {
 
   return (
     <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <LoadingScreen onDone={() => setReady(true)} />
       <CustomCursor />
       <Atmosphere />
 
       <Navbar />
-      <main>
+      <main id="main">
         <CinematicHero />
         <StoryScene />
         <CraftScene />
@@ -66,8 +70,10 @@ function Shell() {
 
 export default function App() {
   return (
-    <AppProvider>
-      <Shell />
-    </AppProvider>
+    <MotionConfig reducedMotion="user">
+      <AppProvider>
+        <Shell />
+      </AppProvider>
+    </MotionConfig>
   );
 }

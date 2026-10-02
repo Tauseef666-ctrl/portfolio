@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tauseef-khan.is-a.dev/sitemap.xml

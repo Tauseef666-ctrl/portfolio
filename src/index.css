@@ -264,6 +264,50 @@ h4 {
   font-size: 0.64rem;
 }
 
+.btn-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  bottom: -40%;
+  left: -35%;
+  width: 38%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg) translateX(-140%);
+  transition: transform 0.65s var(--ease);
+}
+
+.btn:hover .btn-shine::after,
+.btn:focus-visible .btn-shine::after {
+  transform: skewX(-20deg) translateX(430%);
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 400;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  background: #0d0a07;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  color: var(--ink);
+  transition: top 0.3s var(--ease);
+}
+
+.skip-link:focus-visible {
+  top: 12px;
+}
+
 /* ------------------------------------------------------------------ */
 /*  CURSOR                                                             */
 /* ------------------------------------------------------------------ */
@@ -1591,6 +1635,14 @@ footer.site-footer a:hover {
   filter: blur(60px);
   background: radial-gradient(circle, rgba(224, 162, 82, 0.16), transparent 66%);
   animation: orb-drift 7s var(--ease) infinite alternate;
+}
+
+.loading-orb-core {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 42%, rgba(236, 180, 96, 0.5), rgba(141, 94, 44, 0.18) 45%, transparent 72%);
+  box-shadow: 0 0 90px 22px rgba(224, 162, 82, 0.12);
 }
 
 @keyframes orb-drift {
