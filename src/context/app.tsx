@@ -1,9 +1,10 @@
-import { useRef, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import type Lenis from "lenis";
 import { AppContext, type AppContextValue } from "./appContext";
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const [activeAct, setActiveAct] = useState(0);
 
   const scrollTo: AppContextValue["scrollTo"] = (target: string) => {
     const lenis = lenisRef.current;
@@ -18,5 +19,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  return <AppContext.Provider value={{ lenisRef, scrollTo }}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{ lenisRef, scrollTo, activeAct, setActiveAct }}>
+      {children}
+    </AppContext.Provider>
+  );
 }

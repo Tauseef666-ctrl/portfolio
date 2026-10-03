@@ -4,9 +4,13 @@ import type Lenis from "lenis";
 export type AppContextValue = {
   lenisRef: RefObject<Lenis | null>;
   scrollTo: (target: string) => void;
+  activeAct: number;
+  setActiveAct: (index: number) => void;
 };
 
 export const AppContext = createContext<AppContextValue>({
   lenisRef: { current: null },
   scrollTo: () => {},
+  activeAct: 0,
+  setActiveAct: () => {},
 });

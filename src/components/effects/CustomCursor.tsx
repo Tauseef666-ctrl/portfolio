@@ -34,21 +34,16 @@ export function CustomCursor() {
     let sVx = 0;
     let sVy = 0;
     let raf = 0;
+    let pending: EventTarget | null = null;
 
-    const onMove = (e: MouseEvent) => {
-      x = e.clientX;
-      y = e.clientY;
-      vx = x - lastX;
-      vy = y - lastY;
-      lastX = x;
-      lastY = y;
-    };
-
-    const onOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const labelled = target.closest<HTMLElement>("[data-cursor]");
-      const nameText = target.closest<HTMLElement>(".cinema-name");
-      const interactive = target.closest("a, button, [role='button'], input, textarea");
+    // mouseover fires constantly as content scrolls under a still cursor;
+    // coalescing the inspection into the rAF loop keeps it to one pass/frame.
+    const inspect = (target: EventTarget | null) => {
+      const el = target as Element | null;
+      if (!el || !(el instanceof Element)) return;
+      const labelled = el.closest<HTMLElement>("[data-cursor]");
+      const nameText = el.closest<HTMLElement>(".cinema-name");
+      const interactive = el.closest("a, button, [role='button'], input, textarea");
 
       if (nameText) {
         document.body.classList.add("cursor-active");
@@ -73,7 +68,27 @@ export function CustomCursor() {
       }
     };
 
+    const onMove = (e: MouseEvent) => {
+      x = e.clientX;
+      y = e.clientY;
+      vx = x - lastX;
+      vy = y - lastY;
+      lastX = x;
+      lastY = y;
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+
+    const onOver = (e: MouseEvent) => {
+      pending = e.target;
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+
     const loop = () => {
+      if (pending) {
+        inspect(pending);
+        pending = null;
+      }
+
       dotX += (x - dotX) * 0.6;
       dotY += (y - dotY) * 0.6;
       ringX += (x - ringX) * 0.16;
@@ -91,6 +106,20 @@ export function CustomCursor() {
       tail.style.transform = `translate3d(${tailX}px, ${tailY}px, 0) rotate(${angle}deg) scaleX(${0.25 + 0.75 * speed})`;
       tail.style.opacity = String(0.22 + 0.62 * speed);
 
+      // When everything has settled and there is no pending element inspection,
+      // stop the loop until the pointer moves again.
+      const settled =
+        Math.abs(dotX - x) < 0.03 &&
+        Math.abs(dotY - y) < 0.03 &&
+        Math.abs(ringX - x) < 0.12 &&
+        Math.abs(ringY - y) < 0.12 &&
+        Math.abs(tailX - x) < 0.03 &&
+        Math.abs(tailY - y) < 0.03 &&
+        !pending;
+      if (settled) {
+        raf = 0;
+        return;
+      }
       raf = requestAnimationFrame(loop);
     };
 
@@ -102,7 +131,7 @@ export function CustomCursor() {
       document.body.classList.remove("cursor-on");
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseover", onOver);
-      cancelAnimationFrame(raf);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 

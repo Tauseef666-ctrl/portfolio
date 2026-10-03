@@ -1,38 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { ACTS } from "../../data/acts";
 import { useApp } from "../../hooks/useApp";
 
-const scenes = [
-  { id: "intro", label: "Intro" },
-  { id: "story", label: "Story" },
-  { id: "craft", label: "Craft" },
-  { id: "work", label: "Work" },
-  { id: "proof", label: "Proof" },
-  { id: "explore", label: "Explore" },
-  { id: "now", label: "Now" },
-  { id: "reach", label: "Reach" },
-];
-
 export function Navbar() {
-  const { scrollTo } = useApp();
-  const [active, setActive] = useState("intro");
+  const { scrollTo, activeAct } = useApp();
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        }
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-    scenes.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
 
   const go = (id: string) => {
     setOpen(false);
@@ -49,14 +22,14 @@ export function Navbar() {
             <span>TAUSEEF.KHAN</span>
           </button>
 
-          <nav className="nav-links" aria-label="Scene navigation">
-            {scenes.map((scene) => (
+          <nav className="nav-links" aria-label="Act navigation">
+            {ACTS.map((act, i) => (
               <button
-                key={scene.id}
-                className={`nav-link ${active === scene.id ? "active" : ""}`}
-                onClick={() => go(scene.id)}
+                key={act.id}
+                className={`nav-link ${activeAct === i ? "active" : ""}`}
+                onClick={() => go(act.id)}
               >
-                {scene.label}
+                {act.label}
               </button>
             ))}
           </nav>
@@ -84,18 +57,20 @@ export function Navbar() {
             transition={{ duration: 0.3 }}
           >
             <nav aria-label="Mobile navigation" className="mobile-nav-inner">
-              {scenes.map((scene, i) => (
+              {ACTS.map((act, i) => (
                 <motion.button
-                  key={scene.id}
+                  key={act.id}
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ delay: 0.04 * i, duration: 0.3 }}
-                  className={`mobile-nav-link ${active === scene.id ? "active" : ""}`}
-                  onClick={() => go(scene.id)}
+                  className={`mobile-nav-link ${activeAct === i ? "active" : ""}`}
+                  onClick={() => go(act.id)}
                 >
                   <span className="mobile-link-dot" />
-                  <span>{scene.label}</span>
+                  <span>
+                    {act.num} · {act.label}
+                  </span>
                 </motion.button>
               ))}
             </nav>

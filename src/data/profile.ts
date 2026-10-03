@@ -17,6 +17,33 @@ export const profile = {
   ],
   heroIntro:
     "I build digital experiences, explore emerging technologies, and turn ideas into functional, engaging products.",
+  heroRoles: [
+    {
+      name: "Technology Enthusiast",
+      tagline:
+        "I build digital experiences, explore emerging technologies, and turn ideas into functional, engaging products.",
+    },
+    {
+      name: "Developer",
+      tagline:
+        "I write clean, maintainable code across web, mobile, and desktop — and turn features into products people actually ship.",
+    },
+    {
+      name: "UI/UX Designer",
+      tagline:
+        "I design interfaces that feel intuitive, look intentional, and guide people without getting in their way.",
+    },
+    {
+      name: "Software Tester",
+      tagline:
+        "I think in test cases — I break things on purpose so users never hit bugs by accident.",
+    },
+    {
+      name: "AI Prompt Engineer",
+      tagline:
+        "I explore and steer AI models with carefully engineered prompts, turning them into smarter, more useful tools.",
+    },
+  ],
 };
 
 export const heroOrbLabels = [

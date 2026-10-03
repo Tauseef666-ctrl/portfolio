@@ -7,14 +7,7 @@ import { LoadingScreen } from "./components/effects/LoadingScreen";
 import { CustomCursor } from "./components/effects/CustomCursor";
 import { Atmosphere } from "./components/effects/Atmosphere";
 import { Navbar } from "./components/navigation/Navbar";
-import { CinematicHero } from "./components/scenes/CinematicHero";
-import { StoryScene } from "./components/scenes/StoryScene";
-import { CraftScene } from "./components/scenes/CraftScene";
-import { WorkScene } from "./components/scenes/WorkScene";
-import { ProofScene } from "./components/scenes/ProofScene";
-import { ExploreScene } from "./components/scenes/ExploreScene";
-import { NowScene } from "./components/scenes/NowScene";
-import { ReachScene } from "./components/scenes/ReachScene";
+import { FilmExperience } from "./components/experience/FilmExperience";
 import { Footer } from "./components/sections/Footer";
 
 function Shell() {
@@ -22,7 +15,12 @@ function Shell() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.09 });
+    const lenis = new Lenis({
+      lerp: 0.068,
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.2,
+    });
     lenisRef.current = lenis;
     let raf = 0;
     const loop = (time: number) => {
@@ -48,20 +46,13 @@ function Shell() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <LoadingScreen onDone={() => setReady(true)} />
+      {!ready && <LoadingScreen onDone={() => setReady(true)} />}
       <CustomCursor />
       <Atmosphere />
 
       <Navbar />
       <main id="main">
-        <CinematicHero />
-        <StoryScene />
-        <CraftScene />
-        <WorkScene />
-        <ProofScene />
-        <ExploreScene />
-        <NowScene />
-        <ReachScene />
+        <FilmExperience />
       </main>
       <Footer />
     </>
